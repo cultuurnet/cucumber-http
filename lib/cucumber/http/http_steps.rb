@@ -9,14 +9,6 @@ Before do
   @payload = nil
 end
 
-def last_json
-  @response.body
-end
-
-def resolve(string)
-  JsonSpec.remember(string)
-end
-
 Given /^I set headers?:$/ do |headers|
   headers.rows_hash.each { |k, v| @headers[k] = v }
 end
