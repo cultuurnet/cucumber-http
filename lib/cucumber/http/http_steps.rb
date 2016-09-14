@@ -100,7 +100,11 @@ Then /^show me the( unparsed)? response$/ do |unparsed|
 end
 
 Then /^the response status should( not)? be "(#{CAPTURE_INTEGER})"$/ do |negative, status_code|
-  negative ? expect(@response.code).not_to(eq(status_code)) : expect(@response.code).to(eq(status_code))
+  if negative
+    expect(@response.code).not_to eq(status_code)
+  else
+    expect(@response.code).to eq(status_code)
+  end
 end
 
 Then /^the response body should be valid (XML|JSON)$/ do |type|
@@ -116,13 +120,20 @@ Then /^the JSON response should( not)? be '([^']*)'$/ do |negative, expected_res
   expected = JSON.parse(expected_response)
   actual = JSON.parse(@response.body)
 
-  method = negative ? "not_to" : "to"
-  eval "expect actual.#{method} eq(expected)"
+  if negative
+    expect(actual).not_to eq(expected)
+  else
+    expect(actual).to eq(expected)
+  end
 end
 
 Then /^the JSON response should( not)? be:$/ do |negative, expected_response|
   expected = JSON.parse(expected_response)
   actual = JSON.parse(@response.body)
 
-  negative ? expect(actual).not_to(eq(expected)) : expect(actual).to(eq(expected))
+  if negative
+    expect(actual).not_to eq(expected)
+  else
+    expect(actual).to eq(expected)
+  end
 end
