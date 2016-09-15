@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'json_spec', '~> 1.1'
   s.add_runtime_dependency 'rest-client', '~> 1.8'
   s.add_runtime_dependency 'nokogiri', '~> 1.6'
+  s.add_runtime_dependency 'faker', '~> 1.6'
 
   s.add_development_dependency 'rake', '~> 10.0'
   s.add_development_dependency 'bundler', '~> 1.9'
