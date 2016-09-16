@@ -30,18 +30,18 @@ Given /^I send and accept (XML|JSON)$/ do |type|
 end
 
 Given(/^I set the JSON request payload to '(.*?)'$/) do |payload|
-  @payload = JSON.parse(payload)
+  @payload = JSON.parse(resolve(payload))
 end
 
 Given(/^I set the JSON request payload to:$/) do |payload|
-  @payload = JSON.parse(payload)
+  @payload = JSON.parse(resolve(payload))
 end
 
 Given(/^I set the JSON request payload from "(.*?)"$/) do |filename|
   path = "#{Dir.pwd}/features/support/data/#{filename}"
 
   if File.file? path
-    @payload = JSON.parse File.read(path)
+    @payload = JSON.parse(resolve(File.read(path)))
   else
     raise "File not found: '#{path}'"
   end
