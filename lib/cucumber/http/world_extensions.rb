@@ -1,4 +1,4 @@
-module HttpHelpers
+module JsonSpecInterface
   def last_json
     @response.body
   end
@@ -8,4 +8,4 @@ module HttpHelpers
   end
 end
 
-World(HttpHelpers)
+World(JsonSpecInterface)
