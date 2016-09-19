@@ -16,16 +16,16 @@ end
 Given /^I send "(.*?)" and accept (XML|JSON)$/ do |content_type, accept_type|
   steps %Q{
     Given I set headers:
-      | Accept       | application/#{accept_type.downcase} |
       | Content-Type | #{content_type}                     |
+      | Accept       | application/#{accept_type.downcase} |
   }
 end
 
 Given /^I send and accept (XML|JSON)$/ do |type|
   steps %Q{
     Given I set headers:
-      | Accept       | application/#{type.downcase} |
       | Content-Type | application/#{type.downcase} |
+      | Accept       | application/#{type.downcase} |
   }
 end
 
@@ -76,19 +76,6 @@ end
 
 When /^(?:I )?keep the value of the (?:JSON|json)(?: response)?(?: at "(.*)")? as "(.*)"$/ do |path, key|
   JsonSpec.memorize(key, parse_json(last_json, path))
-end
-
-Then /^show me the( unparsed)? response$/ do |unparsed|
-  if unparsed
-    puts @response.body
-  elsif @response.headers['Content-Type'] =~ /json/
-    puts JSON.pretty_generate(JSON.parse(@response.body))
-  elsif @response.headers['Content-Type'] =~ /xml/
-    puts Nokogiri::XML(@response.body)
-  else
-    puts @response.headers
-    puts @response.body
-  end
 end
 
 Then /^the response status should( not)? be "(#{CAPTURE_INTEGER})"$/ do |negative, status_code|
