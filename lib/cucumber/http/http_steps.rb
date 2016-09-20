@@ -1,16 +1,8 @@
-require 'rest-client'
 require 'nokogiri'
 require 'json_spec'
 
-Before do
-  @url = nil
-  @headers = Hash.new
-  @params = Hash.new
-  @payload = nil
-end
-
-Given /^I set headers?:$/ do |headers|
-  headers.rows_hash.each { |k, v| @headers[k] = v }
+Given /^I set headers?:$/ do |hdrs|
+  hdrs.rows_hash.each { |name, value| add_header(name, value) }
 end
 
 Given /^I send "(.*?)" and accept (XML|JSON)$/ do |content_type, accept_type|
@@ -30,18 +22,18 @@ Given /^I send and accept (XML|JSON)$/ do |type|
 end
 
 Given(/^I set the JSON request payload to '(.*?)'$/) do |payload|
-  @payload = JSON.parse(resolve(payload))
+  set_payload(JSON.parse(resolve(payload)).to_json)
 end
 
 Given(/^I set the JSON request payload to:$/) do |payload|
-  @payload = JSON.parse(resolve(payload))
+  set_payload(JSON.parse(resolve(payload)).to_json)
 end
 
 Given(/^I set the JSON request payload from "(.*?)"$/) do |filename|
   path = "#{Dir.pwd}/features/support/data/#{filename}"
 
   if File.file? path
-    @payload = JSON.parse(resolve(File.read(path)))
+    set_payload(JSON.parse(resolve(File.read(path))).to_json)
   else
     raise "File not found: '#{path}'"
   end
@@ -52,26 +44,19 @@ When /^I send a (GET|POST|PATCH|PUT|DELETE) request to "([^"]*)"(?: with paramet
   endpoint = resolve(args.shift)
   params = args.shift
 
-  request_url = @url ? URI.join(@url, endpoint).to_s : endpoint
+  request_url = URI.join(url, endpoint).to_s
 
   unless params.nil?
     if params.class == Cucumber::MultilineArgument::DataTable
-      @headers['params'] = params.rows_hash
+      params_hash = params.rows_hash
     else
-      @headers['params'] = Hash[params.split('&').inject([]) { |result, param| result << param.split('=') }]
+      params_hash  = Hash[params.split('&').inject([]) { |result, param| result << param.split('=') }]
     end
+
+    params_hash.each { |name, value| add_parameter(name, value) }
   end
 
-  begin
-    @response = RestClient::Request.execute(
-      method: method.downcase,
-      url: request_url,
-      payload: @payload.to_json,
-      headers: @headers
-    )
-  rescue RestClient::Exception => e
-    @response = e.response
-  end
+  perform_request(method, request_url)
 end
 
 When /^(?:I )?keep the value of the (?:JSON|json)(?: response)?(?: at "(.*)")? as "(.*)"$/ do |path, key|
@@ -80,24 +65,24 @@ end
 
 Then /^the response status should( not)? be "(#{CAPTURE_INTEGER})"$/ do |negative, status_code|
   if negative
-    expect(@response.code).not_to eq(status_code)
+    expect(response[:status]).not_to eq(status_code)
   else
-    expect(@response.code).to eq(status_code)
+    expect(response[:status]).to eq(status_code)
   end
 end
 
 Then /^the response body should be valid (XML|JSON)$/ do |type|
   case type
   when 'XML'
-    expect { Nokogiri::XML(@response.body) { |config| config.strict } }.not_to raise_error
+    expect { Nokogiri::XML(response[:body]) { |config| config.strict } }.not_to raise_error
   when 'JSON'
-    expect { JSON.parse(@response.body) }.not_to raise_error
+    expect { JSON.parse(response[:body]) }.not_to raise_error
   end
 end
 
 Then /^the JSON response should( not)? be '([^']*)'$/ do |negative, expected_response|
   expected = JSON.parse(expected_response)
-  actual = JSON.parse(@response.body)
+  actual = JSON.parse(response[:body])
 
   if negative
     expect(actual).not_to eq(expected)
@@ -108,7 +93,7 @@ end
 
 Then /^the JSON response should( not)? be:$/ do |negative, expected_response|
   expected = JSON.parse(expected_response)
-  actual = JSON.parse(@response.body)
+  actual = JSON.parse(response[:body])
 
   if negative
     expect(actual).not_to eq(expected)

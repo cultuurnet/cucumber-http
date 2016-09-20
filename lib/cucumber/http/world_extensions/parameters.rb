@@ -1,8 +1,6 @@
 module Cucumber
   module Http
     module Parameters
-      module_function
-
       def parameters
         @parameters ||= {}
       end
@@ -21,3 +19,5 @@ module Cucumber
     end
   end
 end
+
+World(Cucumber::Http::Parameters)

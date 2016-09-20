@@ -1,8 +1,6 @@
 module Cucumber
   module Http
     module Headers
-      module_function
-
       def headers
         @headers ||= {}
       end
@@ -21,3 +19,5 @@ module Cucumber
     end
   end
 end
+
+World(Cucumber::Http::Headers)

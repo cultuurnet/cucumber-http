@@ -1,11 +1,14 @@
-module JsonSpecInterface
-  def last_json
-    @response.body
-  end
+require_relative 'world_extensions/json_spec_interface'
+require_relative 'world_extensions/url'
+require_relative 'world_extensions/headers'
+require_relative 'world_extensions/parameters'
+require_relative 'world_extensions/payload'
+require_relative 'world_extensions/request'
+require_relative 'world_extensions/response'
 
-  def resolve(string)
-    JsonSpec.remember(string)
-  end
-end
-
-World(JsonSpecInterface)
+extend Cucumber::Http::Url
+extend Cucumber::Http::Headers
+extend Cucumber::Http::Parameters
+extend Cucumber::Http::Payload
+extend Cucumber::Http::Request
+extend Cucumber::Http::Response
