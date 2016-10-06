@@ -79,25 +79,3 @@ Then /^the response body should be valid (XML|JSON)$/ do |type|
     expect { JSON.parse(response[:body]) }.not_to raise_error
   end
 end
-
-Then /^the JSON response should( not)? be '([^']*)'$/ do |negative, expected_response|
-  expected = JSON.parse(expected_response)
-  actual = JSON.parse(response[:body])
-
-  if negative
-    expect(actual).not_to eq(expected)
-  else
-    expect(actual).to eq(expected)
-  end
-end
-
-Then /^the JSON response should( not)? be:$/ do |negative, expected_response|
-  expected = JSON.parse(expected_response)
-  actual = JSON.parse(response[:body])
-
-  if negative
-    expect(actual).not_to eq(expected)
-  else
-    expect(actual).to eq(expected)
-  end
-end
