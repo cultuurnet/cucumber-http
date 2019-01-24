@@ -19,5 +19,3 @@ module Cucumber
     end
   end
 end
-
-World(Cucumber::Http::Parameters)

@@ -7,5 +7,3 @@ module JsonSpecInterface
     JsonSpec.remember(string)
   end
 end
-
-World(JsonSpecInterface)
