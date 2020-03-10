@@ -44,7 +44,7 @@ When /^I send a (GET|POST|PATCH|PUT|DELETE) request to "([^"]*)"(?: with paramet
   endpoint = resolve(args.shift)
   params = args.shift
 
-  request_url = URI.join(url, endpoint).to_s
+  request_url = URI.join(url, URI::encode(endpoint)).to_s
 
   unless params.nil?
     if params.class == Cucumber::MultilineArgument::DataTable
