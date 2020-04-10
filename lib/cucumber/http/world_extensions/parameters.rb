@@ -6,11 +6,11 @@ module Cucumber
       end
 
       def add_parameter(key, value)
-        parameters[key.to_sym] = value
+        parameters[key] = value
       end
 
       def remove_parameter(key)
-        parameters.tap { |pars| pars.delete(key.to_sym)}
+        parameters.tap { |pars| pars.delete(key)}
       end
 
       def clear_parameters

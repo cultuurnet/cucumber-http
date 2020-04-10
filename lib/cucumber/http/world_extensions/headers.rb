@@ -6,11 +6,11 @@ module Cucumber
       end
 
       def add_header(key, value)
-        headers[key.to_sym] = value
+        headers[key] = value
       end
 
       def remove_header(key)
-        headers.tap { |hdrs| hdrs.delete(key.to_sym)}
+        headers.tap { |hdrs| hdrs.delete(key)}
       end
 
       def clear_headers
