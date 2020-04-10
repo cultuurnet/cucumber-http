@@ -122,7 +122,7 @@ Examples for testing the [REST API](https://apidoc.uitdatabank.be) of
 
 Creating an organizer with a random name:
 ```ruby
-When /^I(?: have)? created? an organizer with a random name of (#{CAPTURE_INTEGER}) characters?$/ do |characters|
+When /^I create an organizer with a random name of (#{CAPTURE_INTEGER}) characters?$/ do |characters|
   name = Faker::Lorem.characters(characters)
   steps %Q{
     Given I am using the UDB3 development environment
@@ -139,7 +139,7 @@ end
 
 Creating a role with a random name:
 ```ruby
-When /^I(?: have)? created? a role with a random name of (#{CAPTURE_INTEGER}) characters?$/ do |characters|
+When /^I create a role with a random name of (#{CAPTURE_INTEGER}) characters?$/ do |characters|
   name = Faker::Lorem.characters(characters)
   steps %Q{
     Given I am using the UDB3 development environment
