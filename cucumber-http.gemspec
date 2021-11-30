@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.version       = Cucumber::Http::VERSION
   s.licenses      = ['MIT']
   s.authors       = ['Kristof Willaert']
-  s.email         = ['kristof.willaert@cultuurnet.be']
+  s.email         = ['kristof.willaert@publiq.be']
 
   s.summary       = %q{Cucumber steps to easily test XML and JSON APIs}
   s.description   = %q{Cucumber steps to easily test external XML and JSON APIs}
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'cucumber', '>= 2.0'
   s.add_runtime_dependency 'json_spec', '~> 1.1'
-  s.add_runtime_dependency 'rest-client', '~> 1.8'
+  s.add_runtime_dependency 'rest-client', '~> 2.0'
   s.add_runtime_dependency 'nokogiri', '~> 1.6'
   s.add_runtime_dependency 'faker', '~> 1.6'
 
