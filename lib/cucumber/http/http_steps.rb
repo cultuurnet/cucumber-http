@@ -5,6 +5,36 @@ Given /^I set headers?:$/ do |hdrs|
   hdrs.rows_hash.each { |name, value| add_header(name, value) }
 end
 
+Given /^I send "(.*?)"$/ do |content_type|
+  steps %Q{
+    Given I set headers:
+      | Content-Type | application/#{content_type} |
+  }
+end
+
+Given /^I accept "(.*?)"$/ do |accept_type|
+  steps %Q{
+    Given I set headers:
+      | Accept       | application/#{accept_type} |
+  }
+end
+
+Given /^I send and accept "(.*?)"$/ do |type|
+  steps %Q{
+    Given I set headers:
+      | Content-Type | application/#{type} |
+      | Accept       | application/#{type} |
+  }
+end
+
+Given /^I send "(.*?)" and accept "(.*?)"$/ do |content_type, accept_type|
+  steps %Q{
+    Given I set headers:
+      | Content-Type | #{content_type} |
+      | Accept       | #{accept_type}  |
+  }
+end
+
 Given /^I send "(.*?)" and accept (XML|JSON)$/ do |content_type, accept_type|
   steps %Q{
     Given I set headers:
