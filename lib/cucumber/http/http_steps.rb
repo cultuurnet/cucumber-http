@@ -8,22 +8,22 @@ end
 Given /^I send "(.*?)"$/ do |content_type|
   steps %Q{
     Given I set headers:
-      | Content-Type | application/#{content_type} |
+      | Content-Type | #{content_type} |
   }
 end
 
 Given /^I accept "(.*?)"$/ do |accept_type|
   steps %Q{
     Given I set headers:
-      | Accept       | application/#{accept_type} |
+      | Accept       | #{accept_type} |
   }
 end
 
 Given /^I send and accept "(.*?)"$/ do |type|
   steps %Q{
     Given I set headers:
-      | Content-Type | application/#{type} |
-      | Accept       | application/#{type} |
+      | Content-Type | #{type} |
+      | Accept       | #{type} |
   }
 end
 
