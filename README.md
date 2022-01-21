@@ -38,7 +38,7 @@ Feature: Test the UDB3 labels API
   Background:
     Given I am using the UDB3 development environment
      And I am authorized as user "centraal_beheerder"
-     And I send and accept JSON
+     And I send "application/json" and accept "application/ld+json"
 
   @labelcreate
   Scenario: Create label
@@ -64,6 +64,22 @@ Then /^the elapsed time should be less than (#{CAPTURE_FLOAT}) seconds?$/
 
 ```ruby
 Given /^I set headers?:$/
+```
+
+```ruby
+Given /^I send "(.*?)"$/
+```
+
+```ruby
+Given /^I accept "(.*?)"$/
+```
+
+```ruby
+Given /^I send and accept "(.*?)"$/
+```
+
+```ruby
+Given /^I send "(.*?)" and accept "(.*?)"$/
 ```
 
 ```ruby
@@ -127,7 +143,7 @@ When /^I create an organizer with a random name of (#{CAPTURE_INTEGER}) characte
   steps %Q{
     Given I am using the UDB3 development environment
       And I am authorized as user "centraal_beheerder"
-      And I send and accept JSON
+      And I send and accept "application/json"
      When I set the JSON request payload to:
        """
        {"mainLanguage":"nl","website":"https://www.#{name}.be","name":"#{name}","contact":[]}
@@ -144,7 +160,7 @@ When /^I create a role with a random name of (#{CAPTURE_INTEGER}) characters?$/ 
   steps %Q{
     Given I am using the UDB3 development environment
       And I am authorized as user "centraal_beheerder"
-      And I send and accept JSON
+      And I send and accept "application/json"
      When I set the JSON request payload to:
        """
        { "name": "#{name}" }
