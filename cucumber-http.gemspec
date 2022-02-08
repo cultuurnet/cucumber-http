@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors       = ['Kristof Willaert']
   s.email         = ['kristof.willaert@publiq.be']
 
-  s.summary       = %q{Cucumber steps to easily test XML and JSON APIs}
-  s.description   = %q{Cucumber steps to easily test external XML and JSON APIs}
+  s.summary       = %q{Cucumber steps to easily test JSON APIs}
+  s.description   = %q{Cucumber steps to easily test external JSON APIs}
   s.homepage      = "https://github.com/cultuurnet/cucumber-http"
 
   s.files         = Dir['lib/**/*', 'README.md']
@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'cucumber', '~> 2.0'
   s.add_runtime_dependency 'json_spec', '~> 1.1'
   s.add_runtime_dependency 'rest-client', '~> 2.0'
-  s.add_runtime_dependency 'nokogiri', '~> 1.6'
   s.add_runtime_dependency 'faker', '~> 1.6'
 
   s.add_development_dependency 'rake', '~> 10.0'

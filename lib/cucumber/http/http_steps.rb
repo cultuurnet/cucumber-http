@@ -1,4 +1,3 @@
-require 'nokogiri'
 require 'json_spec'
 
 Given /^I set headers?:$/ do |hdrs|
@@ -35,7 +34,7 @@ Given /^I send "(.*?)" and accept "(.*?)"$/ do |content_type, accept_type|
   }
 end
 
-Given /^I send "(.*?)" and accept (XML|JSON)$/ do |content_type, accept_type|
+Given /^I send "(.*?)" and accept JSON$/ do |content_type, accept_type|
   steps %Q{
     Given I set headers:
       | Content-Type | #{content_type}                     |
@@ -43,7 +42,7 @@ Given /^I send "(.*?)" and accept (XML|JSON)$/ do |content_type, accept_type|
   }
 end
 
-Given /^I send and accept (XML|JSON)$/ do |type|
+Given /^I send and accept JSON$/ do |type|
   steps %Q{
     Given I set headers:
       | Content-Type | application/#{type.downcase} |
@@ -101,11 +100,6 @@ Then /^the response status should( not)? be "(#{CAPTURE_INTEGER})"$/ do |negativ
   end
 end
 
-Then /^the response body should be valid (XML|JSON)$/ do |type|
-  case type
-  when 'XML'
-    expect { Nokogiri::XML(response[:body]) { |config| config.strict } }.not_to raise_error
-  when 'JSON'
-    expect { JSON.parse(response[:body]) }.not_to raise_error
-  end
+Then /^the response body should be valid JSON$/ do |type|
+  expect { JSON.parse(response[:body]) }.not_to raise_error
 end

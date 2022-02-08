@@ -12,8 +12,6 @@ Then /^show me the( unparsed)? response$/ do |unparsed|
   if unparsed.nil?
     if response[:headers]['content-type'][0] =~ /json/
       body = JSON.pretty_generate(JSON.parse(response[:body]))
-    elsif response[:headers]['content-type'][0] =~ /xml/
-      body = Nokogiri::XML(response[:body])
     end
   end
 
