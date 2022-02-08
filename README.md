@@ -83,11 +83,11 @@ Given /^I send "(.*?)" and accept "(.*?)"$/
 ```
 
 ```ruby
-Given /^I send "(.*?)" and accept (XML|JSON)$/
+Given /^I send "(.*?)" and accept JSON$/
 ```
 
 ```ruby
-Given /^I send and accept (XML|JSON)$/
+Given /^I send and accept JSON$/
 ```
 
 ```ruby
@@ -107,7 +107,7 @@ Then /^the response status should( not)? be "(#{CAPTURE_INTEGER})"$/
 ```
 
 ```ruby
-Then /^the response body should be valid (XML|JSON)$/
+Then /^the response body should be valid JSON$/
 ```
 
 #### Debugging
