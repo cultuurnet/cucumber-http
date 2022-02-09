@@ -34,19 +34,19 @@ Given /^I send "(.*?)" and accept "(.*?)"$/ do |content_type, accept_type|
   }
 end
 
-Given /^I send "(.*?)" and accept JSON$/ do |content_type, accept_type|
+Given /^I send "(.*?)" and accept JSON$/ do |content_type|
   steps %Q{
     Given I set headers:
-      | Content-Type | #{content_type}                     |
-      | Accept       | application/#{accept_type.downcase} |
+      | Content-Type | #{content_type}  |
+      | Accept       | application/json |
   }
 end
 
-Given /^I send and accept JSON$/ do |type|
+Given /^I send and accept JSON$/ do
   steps %Q{
     Given I set headers:
-      | Content-Type | application/#{type.downcase} |
-      | Accept       | application/#{type.downcase} |
+      | Content-Type | application/json |
+      | Accept       | application/json |
   }
 end
 
@@ -100,6 +100,6 @@ Then /^the response status should( not)? be "(#{CAPTURE_INTEGER})"$/ do |negativ
   end
 end
 
-Then /^the response body should be valid JSON$/ do |type|
+Then /^the response body should be valid JSON$/ do
   expect { JSON.parse(response[:body]) }.not_to raise_error
 end
