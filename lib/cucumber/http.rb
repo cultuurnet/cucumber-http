@@ -1,4 +1,3 @@
-require 'cucumber/http/parametertypes'
 require 'cucumber/http/world_extensions'
 require 'cucumber/http/hooks'
 require 'cucumber/http/http_steps'

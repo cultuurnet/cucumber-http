@@ -92,12 +92,12 @@ When /^(?:I )?keep the value of the (?:JSON|json)(?: response)?(?: at "(.*)")? a
   JsonSpec.memorize(key, parse_json(last_json, path))
 end
 
-Then /^the response status should( not)? be "({integer})"$/ do |negative, status_code|
-  if negative
-    expect(response[:status]).not_to eq(status_code)
-  else
-    expect(response[:status]).to eq(status_code)
-  end
+Then 'the response status should be "{int}"' do |status_code|
+  expect(response[:status]).to eq(status_code)
+end
+
+Then 'the response status should not be "{int}"' do |status_code|
+  expect(response[:status]).not_to eq(status_code)
 end
 
 Then /^the response body should be valid JSON$/ do
