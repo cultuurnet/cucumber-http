@@ -22,6 +22,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rest-client', '~> 2.0'
   s.add_runtime_dependency 'faker', '~> 1.6'
 
-  s.add_development_dependency 'rake', '~> 10.0'
+  s.add_development_dependency 'rake', '~> 13.0'
   s.add_development_dependency 'bundler', '~> 1.9'
 end
