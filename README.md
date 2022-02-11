@@ -57,7 +57,7 @@ Given /^I am benchmarking$/
 ```
 
 ```ruby
-Then /^the elapsed time should be less than (#{CAPTURE_FLOAT}) seconds?$/
+Then /^the elapsed time should be less than ({float}) seconds?$/
 ```
 
 #### HTTP
@@ -103,7 +103,7 @@ When /^I send a (GET|POST|PATCH|PUT|DELETE) request to "([^"]*)"(?: with paramet
 ```
 
 ```ruby
-Then /^the response status should( not)? be "(#{CAPTURE_INTEGER})"$/
+Then /^the response status should( not)? be "({integer})"$/
 ```
 
 ```ruby
@@ -138,7 +138,7 @@ Examples for testing the [REST API](https://apidoc.uitdatabank.be) of
 
 Creating an organizer with a random name:
 ```ruby
-When /^I create an organizer with a random name of (#{CAPTURE_INTEGER}) characters?$/ do |characters|
+When /^I create an organizer with a random name of ({integer}) characters?$/ do |characters|
   name = Faker::Lorem.characters(characters)
   steps %Q{
     Given I am using the UDB3 development environment
@@ -155,7 +155,7 @@ end
 
 Creating a role with a random name:
 ```ruby
-When /^I create a role with a random name of (#{CAPTURE_INTEGER}) characters?$/ do |characters|
+When /^I create a role with a random name of ({integer}) characters?$/ do |characters|
   name = Faker::Lorem.characters(characters)
   steps %Q{
     Given I am using the UDB3 development environment
