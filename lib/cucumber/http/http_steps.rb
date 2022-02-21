@@ -71,6 +71,7 @@ end
 Given 'I set the form data properties to:' do |table|
   table.rows_hash.each { |name, value| add_multipart_payload(name, value) }
 
+  remove_header('Content-Type')
   add_multipart_payload('multipart', true)
 end
 
@@ -102,6 +103,7 @@ When 'I upload {string} from path {string} to {string}' do |key, filename, endpo
   request_url = URI.join(url, URI::encode(endpoint)).to_s
 
   if File.file? path
+    remove_header('Content-Type')
     add_multipart_payload(payload_key, File.new(path, 'rb'))
   else
     raise "File not found: '#{path}'"
