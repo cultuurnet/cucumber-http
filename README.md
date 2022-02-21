@@ -50,6 +50,25 @@ Feature: Test the UDB3 labels API
      And the JSON response at "privacy" should be "public"
 ```
 
+```ruby
+@api @images
+Feature: Test the UDB3 image API
+
+  Background:
+    Given I am using the UDB3 development environment
+     And I am authorized as user "centraal_beheerder"
+     And I accept "application/json"
+
+   @imagecreate
+   Scenario: Create image
+     Given I set the form data properties to:
+        | description     | logo |
+        | copyrightHolder | me   |
+        | language        | nl   |
+     When I upload "file" from path "images/UDB.jpg" to "/images/"
+     Then the response status should be "201"
+```
+
 #### Benchmarking
 
 ```ruby
@@ -91,6 +110,10 @@ Given /^I send and accept JSON$/
 ```
 
 ```ruby
+Given 'I set the form data properties to:'
+```
+
+```ruby
 Given /^I set the JSON request payload to:$/
 ```
 
@@ -100,6 +123,10 @@ Given /^I set the JSON request payload from "(.*?)"$/
 
 ```ruby
 When /^I send a (GET|POST|PATCH|PUT|DELETE) request to "([^"]*)"(?: with parameters?:)?$/
+```
+
+```ruby
+When 'I upload {string} from path {string} to {string}"'
 ```
 
 ```ruby
