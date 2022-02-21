@@ -94,7 +94,7 @@ When /^I send a (GET|POST|PATCH|PUT|DELETE) request to "([^"]*)"(?: with paramet
   perform_request(method, request_url)
 end
 
-When 'I upload {string} from path {string} to {string}"' do |key, filename, endpoint|
+When 'I upload {string} from path {string} to {string}' do |key, filename, endpoint|
   method      = 'post'
   payload_key = key
   path        = "#{Dir.pwd}/features/support/data/#{filename}"
