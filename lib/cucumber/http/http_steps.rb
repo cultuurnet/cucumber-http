@@ -70,6 +70,8 @@ end
 
 Given 'I set the form data properties to:' do |table|
   table.rows_hash.each { |name, value| add_multipart_payload(name, value) }
+
+  add_multipart_payload('multipart', true)
 end
 
 When /^I send a (GET|POST|PATCH|PUT|DELETE) request to "([^"]*)"(?: with parameters?:)?$/ do |*args|
