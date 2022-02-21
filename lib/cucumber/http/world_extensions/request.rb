@@ -36,6 +36,9 @@ module Cucumber
         set_response('status', r.code)
         set_response('body', r.body)
         set_response('headers', r.raw_headers)
+
+        clear_multipart_payload
+        clear_payload
       end
 
       def clear_request
