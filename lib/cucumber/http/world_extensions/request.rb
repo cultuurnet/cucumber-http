@@ -14,12 +14,14 @@ module Cucumber
       def perform_request(method, path)
         add_header('params', parameters)
 
+        request_payload = multipart_payload.empty? ? payload : multipart_payload
+
         begin
           r = RestClient::Request.execute(
             method: method.downcase,
             url: path,
             headers: headers,
-            payload: payload
+            payload: request_payload
           )
         rescue RestClient::Exception => e
           r = e.response
@@ -27,13 +29,16 @@ module Cucumber
 
         set_request('url', path)
         set_request('method', method.upcase)
-        set_request('headers', headers)
+        set_request('headers', headers.tap { |hdrs| hdrs.delete('params')})
         set_request('parameters', parameters)
-        set_request('payload', payload)
+        set_request('payload', request_payload)
 
         set_response('status', r.code)
         set_response('body', r.body)
         set_response('headers', r.raw_headers)
+
+        clear_multipart_payload
+        clear_payload
       end
 
       def clear_request

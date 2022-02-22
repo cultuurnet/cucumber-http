@@ -3,6 +3,7 @@ After do
   clear_parameters
   clear_headers
   clear_payload
+  clear_multipart_payload
   clear_request
   clear_response
 end

@@ -68,6 +68,13 @@ Given(/^I set the JSON request payload from "(.*?)"$/) do |filename|
   end
 end
 
+Given 'I set the form data properties to:' do |table|
+  table.rows_hash.each { |name, value| add_multipart_payload(name, value) }
+
+  remove_header('Content-Type')
+  add_multipart_payload('multipart', true)
+end
+
 When /^I send a (GET|POST|PATCH|PUT|DELETE) request to "([^"]*)"(?: with parameters?:)?$/ do |*args|
   method = args.shift
   endpoint = resolve(args.shift)
@@ -83,6 +90,23 @@ When /^I send a (GET|POST|PATCH|PUT|DELETE) request to "([^"]*)"(?: with paramet
     end
 
     params_hash.each { |name, value| add_parameter(name, value) }
+  end
+
+  perform_request(method, request_url)
+end
+
+When 'I upload {string} from path {string} to {string}' do |key, filename, endpoint|
+  method      = 'post'
+  payload_key = key
+  path        = "#{Dir.pwd}/features/support/data/#{filename}"
+
+  request_url = URI.join(url, URI::encode(endpoint)).to_s
+
+  if File.file? path
+    remove_header('Content-Type')
+    add_multipart_payload(payload_key, File.new(path, 'rb'))
+  else
+    raise "File not found: '#{path}'"
   end
 
   perform_request(method, request_url)
