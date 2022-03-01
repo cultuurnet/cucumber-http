@@ -1,5 +1,3 @@
-require 'json_spec'
-
 Given /^I set headers?:$/ do |hdrs|
   hdrs.rows_hash.each { |name, value| add_header(name, value) }
 end
@@ -59,7 +57,7 @@ Given(/^I set the JSON request payload to:$/) do |payload|
 end
 
 Given(/^I set the JSON request payload from "(.*?)"$/) do |filename|
-  path = "#{Dir.pwd}/features/support/data/#{filename}"
+  path = "#{Cucumber::Http.data_directory}/#{filename}"
 
   if File.file? path
     set_payload(JSON.parse(resolve(File.read(path))).to_json)
@@ -98,7 +96,7 @@ end
 When 'I upload {string} from path {string} to {string}' do |key, filename, endpoint|
   method      = 'post'
   payload_key = key
-  path        = "#{Dir.pwd}/features/support/data/#{filename}"
+  path        = "#{Cucumber::Http.data_directory}/#{filename}"
 
   request_url = URI.join(url, URI::encode(endpoint)).to_s
 
