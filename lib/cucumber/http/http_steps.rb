@@ -125,3 +125,7 @@ end
 Then /^the response body should be valid JSON$/ do
   expect { JSON.parse(response[:body]) }.not_to raise_error
 end
+
+Then 'the response header "{string}" should be "{string}"' do |header, value|
+  expect(response[:headers][header.downcase][0]).to eq(value)
+end
