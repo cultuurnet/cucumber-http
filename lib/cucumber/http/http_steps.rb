@@ -87,7 +87,7 @@ When /^I send a (GET|POST|PATCH|PUT|DELETE) request to "([^"]*)"(?: with paramet
       params_hash  = Hash[params.split('&').inject([]) { |result, param| result << param.split('=') }]
     end
 
-    params_hash.each { |name, value| add_parameter(name, value) }
+    params_hash.each { |name, value| add_parameter(name, resolve(value)) }
   end
 
   perform_request(method, request_url)
