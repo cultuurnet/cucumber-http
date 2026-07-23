@@ -21,7 +21,8 @@ module Cucumber
             method: method.downcase,
             url: path,
             headers: headers,
-            payload: request_payload
+            payload: request_payload,
+            max_redirects: 0
           )
         rescue RestClient::Exception => e
           r = e.response
