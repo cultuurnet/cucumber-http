@@ -17,11 +17,11 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.3'
 
-  s.add_runtime_dependency 'cucumber', '~> 3.0'
-  s.add_runtime_dependency 'json_spec', '~> 1.1'
-  s.add_runtime_dependency 'rest-client', '~> 2.0'
-  s.add_runtime_dependency 'faker', '~> 1.6'
+  s.add_runtime_dependency 'cucumber'
+  s.add_runtime_dependency 'json_spec'
+  s.add_runtime_dependency 'rest-client'
+  s.add_runtime_dependency 'faker'
 
-  s.add_development_dependency 'rake', '~> 13.0'
-  s.add_development_dependency 'bundler', '~> 1.9'
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'bundler'
 end
