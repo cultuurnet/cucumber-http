@@ -78,7 +78,7 @@ When /^I send a (GET|POST|PATCH|PUT|DELETE) request to "([^"]*)"(?: with paramet
   endpoint = resolve(args.shift)
   params = args.shift
 
-  request_url = URI.join(url, URI::encode(endpoint)).to_s
+  request_url = URI.join(url, endpoint).to_s
 
   unless params.nil?
     if params.class == Cucumber::MultilineArgument::DataTable
@@ -98,7 +98,7 @@ When 'I upload {string} from path {string} to {string}' do |key, filename, endpo
   payload_key = key
   path        = "#{Cucumber::Http.data_directory}/#{filename}"
 
-  request_url = URI.join(url, URI::encode(endpoint)).to_s
+  request_url = URI.join(url, endpoint).to_s
 
   if File.file? path
     remove_header('Content-Type')
